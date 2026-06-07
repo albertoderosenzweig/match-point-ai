@@ -109,7 +109,7 @@ export default function CorePage() {
       {/* 🖼️ 2. CORE EXTRACTION OUTPUT CARD */}
       {extractedCore && (
         <section style={{ marginBottom: '40px', background: '#111827', padding: '24px', borderRadius: '8px', border: '2px solid #a3e635', boxShadow: '0 4px 20px rgba(163,230,53,0.15)' }}>
-          <h2 style={{ fontSize: '1.2rem', color: '#a3e635', marginTop: 0, margin0Bottom: '15px' }}>✨ Análisis Predictivo de Ocupación (Core Card)</h2>
+          <h2 style={{ fontSize: '1.2rem', color: '#a3e635', marginTop: 0, marginBottom: '15px' }}>✨ Análisis Predictivo de Ocupación (Core Card)</h2>
           
           <div style={{ marginBottom: '15px' }}>
             <strong style={{ color: '#9ca3af' }}>💡 Propuesta de Valor Extraída:</strong>
