@@ -159,4 +159,4 @@ export default function CorePage() {
       </section>
     </div>
   );
-}
+}// Verificación de sincronización
