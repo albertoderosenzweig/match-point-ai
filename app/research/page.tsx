@@ -81,4 +81,113 @@ export default function ResearchPage() {
       {/* GLOBAL BENCHMARKS */}
       <section style={{ marginBottom: 40 }}>
         <h2 style={{ color: '#a3e635', fontSize: '1.1rem', marginBottom: 16 }}>5 Global Benchmark Examples</h2>
-        <div style={{
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: 16 }}>
+          {globalBenchmarks.map((b, i) => (
+            <div key={i} style={{ background: '#111827', border: '1px solid #374151', borderRadius: 8, padding: 20 }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 8 }}>
+                <strong style={{ color: '#fff', fontSize: '0.95rem' }}>{b.name}</strong>
+                <span style={{ fontSize: 11, padding: '2px 8px', borderRadius: 6, background: b.tagBg, color: b.tagColor }}>{b.tag}</span>
+              </div>
+              <p style={{ color: '#9ca3af', fontSize: 12, marginBottom: 4 }}>{b.country}</p>
+              <p style={{ color: '#a3e635', fontWeight: 'bold', fontSize: '0.9rem', marginBottom: 8 }}>{b.metric}</p>
+              <p style={{ color: '#d1d5db', fontSize: '0.85rem', lineHeight: 1.5 }}>{b.insight}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* MEXICO LOCALIZATION */}
+      <section style={{ marginBottom: 40, background: '#111827', border: '1px solid #374151', borderRadius: 8, padding: 24 }}>
+        <h2 style={{ color: '#a3e635', fontSize: '1.1rem', marginBottom: 16 }}>Mexico Market Localization</h2>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 16 }}>
+          {[
+            { stat: '340%', label: 'Padel court growth in CDMX (2020–2025)' },
+            { stat: '78%', label: 'Clubs still use WhatsApp or phone for bookings' },
+            { stat: '$380 MXN', label: 'Average peak-hour court rate in Polanco/Santa Fe' },
+          ].map((m, i) => (
+            <div key={i} style={{ background: '#1f2937', borderRadius: 8, padding: 16, textAlign: 'center' }}>
+              <p style={{ color: '#a3e635', fontSize: '1.8rem', fontWeight: 'bold', margin: 0 }}>{m.stat}</p>
+              <p style={{ color: '#9ca3af', fontSize: '0.85rem', marginTop: 4 }}>{m.label}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* COMPETITOR TABLE */}
+      <section style={{ marginBottom: 40 }}>
+        <h2 style={{ color: '#a3e635', fontSize: '1.1rem', marginBottom: 16 }}>8 Competitors + Substitutes</h2>
+        <div style={{ display: 'flex', gap: 12, marginBottom: 16, flexWrap: 'wrap' }}>
+          <input
+            placeholder="Search by name..."
+            value={search}
+            onChange={e => setSearch(e.target.value)}
+            style={{ flex: 1, minWidth: 200, padding: '8px 12px', borderRadius: 6, background: '#1f2937', border: '1px solid #4b5563', color: '#fff', fontSize: '0.9rem' }}
+          />
+          {['All', 'Direct Competitor', 'Substitute'].map(f => (
+            <button key={f} onClick={() => setFilter(f)}
+              style={{ padding: '8px 16px', borderRadius: 6, border: 'none', cursor: 'pointer', fontWeight: 'bold', fontSize: '0.85rem',
+                background: filter === f ? '#a3e635' : '#1f2937', color: filter === f ? '#000' : '#9ca3af' }}>
+              {f}
+            </button>
+          ))}
+        </div>
+        <div style={{ overflowX: 'auto' }}>
+          <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.85rem' }}>
+            <thead>
+              <tr style={{ background: '#1f2937', color: '#9ca3af' }}>
+                {['Name', 'Type', 'Courts', 'Pricing', 'Tech', 'Gap'].map(h => (
+                  <th key={h} style={{ padding: '10px 14px', textAlign: 'left', fontWeight: 'bold' }}>{h}</th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {filtered.map((c, i) => (
+                <tr key={i} style={{ borderBottom: '1px solid #1f2937' }}>
+                  <td style={{ padding: '10px 14px', color: '#fff', fontWeight: 'bold' }}>{c.name}</td>
+                  <td style={{ padding: '10px 14px' }}>
+                    <span style={{ fontSize: 11, padding: '2px 8px', borderRadius: 6,
+                      background: c.type === 'Direct Competitor' ? '#FCEBEB' : '#FAEEDA',
+                      color: c.type === 'Direct Competitor' ? '#A32D2D' : '#854F0B' }}>{c.type}</span>
+                  </td>
+                  <td style={{ padding: '10px 14px', color: '#d1d5db' }}>{c.courts}</td>
+                  <td style={{ padding: '10px 14px', color: '#a3e635', fontWeight: 'bold' }}>{c.pricing}</td>
+                  <td style={{ padding: '10px 14px', color: '#d1d5db' }}>{c.tech}</td>
+                  <td style={{ padding: '10px 14px', color: '#9ca3af', fontSize: '0.8rem' }}>{c.gap}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      {/* RISK MAP */}
+      <section style={{ marginBottom: 40, background: '#111827', border: '1px solid #374151', borderRadius: 8, padding: 24 }}>
+        <h2 style={{ color: '#a3e635', fontSize: '1.1rem', marginBottom: 16 }}>Risk Map</h2>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
+          {Object.entries(quadrantConfig).map(([key, q]) => (
+            <div key={key} style={{ borderRadius: 8, padding: 16, background: q.bg, border: `0.5px solid ${q.border}` }}>
+              <p style={{ fontWeight: 'bold', fontSize: '0.8rem', marginBottom: 8, color: q.color, textTransform: 'uppercase' }}>{q.label}</p>
+              {risks.filter(r => r.quadrant === key).map((r, i) => (
+                <p key={i} style={{ fontSize: '0.82rem', margin: '4px 0', color: q.color }}>• {r.label}</p>
+              ))}
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* SAVE */}
+      <section style={{ background: '#111827', border: '1px solid #374151', borderRadius: 8, padding: 24, textAlign: 'center' }}>
+        <h2 style={{ color: '#9ca3af', fontSize: '1rem', marginBottom: 12 }}>Save Research Record to Supabase</h2>
+        {saved ? (
+          <p style={{ color: '#a3e635', fontWeight: 'bold' }}>Research saved successfully to research_outputs table!</p>
+        ) : (
+          <button onClick={handleSave} disabled={saving}
+            style={{ background: '#10b981', color: '#fff', border: 'none', padding: '12px 32px', borderRadius: 6, cursor: 'pointer', fontWeight: 'bold', fontSize: '1rem' }}>
+            {saving ? 'Saving...' : 'Save Research Output'}
+          </button>
+        )}
+      </section>
+
+    </div>
+  );
+}
