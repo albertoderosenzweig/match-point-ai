@@ -12,27 +12,13 @@ export async function POST(req: NextRequest) {
       body: JSON.stringify({
         contents: [{
           parts: [{
-            text: `You are the Core Agent for Match Point AI, a Padel club system.
-Analyze this input and respond ONLY with a raw JSON object. No markdown. No backticks. No explanation. Start your response with { and end with }:
-{
-  "propuesta_valor": "one sentence value insight",
-  "pilares": ["pillar 1", "pillar 2", "pillar 3"],
-  "metricas_exito": "one sentence key metric"
-}
-Input: ${intakeText}`
+            text: `You are a JSON API. Return ONLY a JSON object, nothing else.
+No markdown, no backticks, no explanation.
+Use this exact structure:
+{"propuesta_valor":"...","pilares":["...","...","..."],"metricas_exito":"..."}
+
+Input to analyze: ${intakeText}`
           }]
-        }]
-      })
-    }
-  );
-
-  const data = await response.json();
-  const raw = data.candidates?.[0]?.content?.parts?.[0]?.text || '';
-
-  try {
-    const clean = raw.replace(/```json|```/g, '').trim();
-    return NextResponse.json(JSON.parse(clean));
-  } catch {
-    return NextResponse.json({ error: 'Parse error', raw }, { status: 500 });
-  }
-}
+        }],
+        generationConfig: {
+          temperature: 0.1,
