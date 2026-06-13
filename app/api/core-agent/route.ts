@@ -12,13 +12,26 @@ export async function POST(req: NextRequest) {
       body: JSON.stringify({
         contents: [{
           parts: [{
-            text: `You are a JSON API. Return ONLY a JSON object, nothing else.
-No markdown, no backticks, no explanation.
-Use this exact structure:
-{"propuesta_valor":"...","pilares":["...","...","..."],"metricas_exito":"..."}
-
-Input to analyze: ${intakeText}`
+            text: `You are a JSON API. Return ONLY a JSON object, nothing else. No markdown, no backticks, no explanation. Use this exact structure: {"propuesta_valor":"...","pilares":["...","...","..."],"metricas_exito":"..."} Input to analyze: ${intakeText}`
           }]
         }],
         generationConfig: {
           temperature: 0.1,
+          responseMimeType: "application/json"
+        }
+      })
+    }
+  );
+
+  const data = await response.json();
+  const raw = data.candidates?.[0]?.content?.parts?.[0]?.text || '';
+
+  try {
+    const match = raw.match(/\{[\s\S]*\}/);
+    const jsonStr = match ? match[0] : raw;
+    return NextResponse.json(JSON.parse(jsonStr));
+  } catch (e) {
+    console.log('RAW:', raw);
+    return NextResponse.json({ error: 'Parse error', raw }, { status: 500 });
+  }
+}
