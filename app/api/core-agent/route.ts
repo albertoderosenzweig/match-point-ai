@@ -13,7 +13,7 @@ export async function POST(req: NextRequest) {
         contents: [{
           parts: [{
             text: `You are the Core Agent for Match Point AI, a Padel club system.
-Analyze this input and respond ONLY with valid JSON, no markdown, no backticks:
+Analyze this input and respond ONLY with a raw JSON object. No markdown. No backticks. No explanation. Start your response with { and end with }:
 {
   "propuesta_valor": "one sentence value insight",
   "pilares": ["pillar 1", "pillar 2", "pillar 3"],
