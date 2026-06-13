@@ -14,21 +14,33 @@ export default function CorePage() {
   const [extractedCore, setExtractedCore] = useState<any>(null);
   const [savedLogs, setSavedLogs] = useState<any[]>([]);
 
-  const handleExtract = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!intakeText.trim()) return;
+ const handleExtract = async (e: React.FormEvent) => {
+  e.preventDefault();
+  if (!intakeText.trim()) return;
 
-    setLoading(true);
-    
-    setTimeout(() => {
-      setExtractedCore({
-        propuesta_valor: "Predictive occupancy optimization for Padel courts using intelligent player matching.",
-        pilares: ["Operational efficiency (94.2% usage)", "Member retention (A+ Score)", "Core Optimizer suggestion"],
-        metricas_exito: "Critical reduction of empty slots in morning peak hours (08:00 - 09:30)."
-      });
-      setLoading(false);
-    }, 1200);
-  };
+  setLoading(true);
+
+  try {
+    const res = await fetch('/api/core-agent', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ intakeText }),
+    });
+
+    const data = await res.json();
+
+    if (data.error) {
+      alert(`AI Error: ${data.error}`);
+    } else {
+      setExtractedCore(data);
+    }
+  } catch (err) {
+    console.error(err);
+    alert('Network error calling Core Agent.');
+  } finally {
+    setLoading(false);
+  }
+};
 
   const handleSaveToSupabase = async () => {
     if (!extractedCore) return;
