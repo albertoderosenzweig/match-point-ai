@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { createClient } from '@supabase/supabase-js';
 
 const supabase = createClient(
@@ -41,7 +41,18 @@ export default function ResearchPage() {
   const [search, setSearch] = useState('');
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
-
+  const [logs, setLogs] = useState<any[]>([]);
+   useEffect(() => {
+    const fetchLogs = async () => {
+      const { data } = await supabase
+        .from('research_outputs')
+        .select('id, saved_at, created_at')
+        .order('created_at', { ascending: false })
+        .limit(5);
+      if (data) setLogs(data);
+    };
+    fetchLogs();
+  }, [saved]);
   const filtered = competitors.filter(c => {
     const matchType = filter === 'All' || c.type === filter;
     const matchSearch = c.name.toLowerCase().includes(search.toLowerCase());
@@ -187,7 +198,28 @@ export default function ResearchPage() {
           </button>
         )}
       </section>
-
+{/* DASHBOARD WIDGET */}
+<section style={{ marginTop: 24, background: '#111827', border: '1px solid #374151', borderRadius: 8, padding: 24 }}>
+  <h2 style={{ color: '#9ca3af', fontSize: '1rem', marginBottom: 12 }}>
+    Recent Research Records
+  </h2>
+  {logs.length === 0 ? (
+    <p style={{ color: '#6b7280', fontSize: '0.85rem' }}>No records saved yet.</p>
+  ) : (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+      {logs.map((log) => (
+        <div key={log.id} style={{ background: '#1f2937', padding: '12px 16px', borderRadius: 6, border: '1px solid #374151', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <span style={{ color: '#a3e635', fontSize: '0.8rem', fontWeight: 'bold' }}>
+            Record #{log.id}
+          </span>
+          <span style={{ color: '#9ca3af', fontSize: '0.8rem' }}>
+            {new Date(log.created_at).toLocaleString()}
+          </span>
+        </div>
+      ))}
+    </div>
+  )}
+</section>
     </div>
   );
 }
