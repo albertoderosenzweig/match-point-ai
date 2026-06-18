@@ -521,6 +521,95 @@ export default function PricingPage() {
         </div>
       </section>
 
+      {/* ─── Assumptions Table ──────────────────────────────────────────────── */}
+      <section className="max-w-5xl mx-auto px-6 py-16">
+        <div className="text-center mb-10">
+          <h2 className="text-sm font-semibold tracking-widest uppercase text-gray-500 mb-3">
+            Supuestos del Modelo
+          </h2>
+          <h3 className="text-3xl font-bold">Assumptions Table</h3>
+          <p className="text-gray-400 mt-3 max-w-xl mx-auto text-sm">
+            Los valores default de la calculadora están basados en benchmarks del mercado de padel en México.
+          </p>
+        </div>
+
+        <div className="overflow-x-auto">
+          <table className="w-full text-sm border-collapse">
+            <thead>
+              <tr className="border-b border-white/10 text-gray-500 text-xs uppercase tracking-wider">
+                <th className="text-left py-3 pr-4">Variable</th>
+                <th className="text-left py-3 pr-4">Valor default</th>
+                <th className="text-left py-3 pr-4">Rango posible</th>
+                <th className="text-left py-3">Fuente / Justificación</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-white/5">
+              {[
+                {
+                  variable: "Horas disponibles / día",
+                  default: "10 hrs",
+                  range: "8 – 14 hrs",
+                  source: "Horario típico de clubes CDMX (7am–9pm)",
+                },
+                {
+                  variable: "Días al mes",
+                  default: "30 días",
+                  range: "28 – 31 días",
+                  source: "Promedio mensual estándar",
+                },
+                {
+                  variable: "Número de canchas",
+                  default: "4 canchas",
+                  range: "1 – 20 canchas",
+                  source: "Club Starter promedio en México",
+                },
+                {
+                  variable: "Ocupación promedio",
+                  default: "60%",
+                  range: "10% – 100%",
+                  source: "Benchmark industria padel LATAM (Playtomic 2024)",
+                },
+                {
+                  variable: "Precio por hora",
+                  default: "$350 MXN",
+                  range: "$100 – $1,000 MXN",
+                  source: "Precio promedio canchas CDMX (Google Maps + Playtomic)",
+                },
+                {
+                  variable: "Socios activos",
+                  default: "80 socios",
+                  range: "0 – 2,000 socios",
+                  source: "Club mediano en México",
+                },
+                {
+                  variable: "Cuota mensual socio",
+                  default: "$500 MXN",
+                  range: "$0 – $2,000 MXN",
+                  source: "Membresías típicas clubes deportivos CDMX",
+                },
+                {
+                  variable: "Descuento plan anual",
+                  default: "20%",
+                  range: "—",
+                  source: "Estándar SaaS (Stripe, HubSpot, Notion)",
+                },
+              ].map((row) => (
+                <tr key={row.variable} className="hover:bg-white/3 transition-colors">
+                  <td className="py-3 pr-4 font-medium text-white">{row.variable}</td>
+                  <td className="py-3 pr-4 text-emerald-400 font-semibold">{row.default}</td>
+                  <td className="py-3 pr-4 text-gray-400">{row.range}</td>
+                  <td className="py-3 text-gray-400 text-xs leading-relaxed">{row.source}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        <p className="text-xs text-gray-600 mt-4 text-center">
+          * Los valores son estimados con fines demostrativos. Cada club debe ajustar según su operación real.
+        </p>
+      </section>
+
       {/* Footer */}
       <footer className="border-t border-white/10 px-6 py-8 text-center text-gray-600 text-sm">
         Match Point AI · Proyecto Semana 3 · Ibero Negocios Inteligentes · Prof. Patricia Navarro
