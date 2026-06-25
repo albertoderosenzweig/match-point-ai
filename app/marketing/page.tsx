@@ -99,7 +99,7 @@ export default function MarketingPage() {
       <section className="pt-24 pb-16 px-6 text-center border-b border-gray-800">
         <span className="inline-block bg-emerald-500/10 text-emerald-400 text-xs font-semibold tracking-widest uppercase px-3 py-1 rounded-full mb-6 border border-emerald-500/20">Marketing Engine - Semana 4</span>
         <h1 className="text-4xl md:text-5xl font-bold mb-4">Contenido que <span className="text-emerald-400">convierte</span></h1>
-        <p className="text-gray-400 text-lg max-w-xl mx-auto">Posts, scripts, calendario y A/B tests para llenar tus canchas.</p>
+        <p className="text-gray-400 text-lg max-w-xl mx-auto">Posts, scripts, calendario y A/B tests. Todo listo para publicar y crecer tu club.</p>
       </section>
 
       <section className="max-w-5xl mx-auto px-6 py-14 border-b border-gray-800">
