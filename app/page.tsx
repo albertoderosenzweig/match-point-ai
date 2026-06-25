@@ -6,7 +6,7 @@ import { useState } from 'react';
 const STATS = [
   { value: '+35%', label: 'Ocupación promedio' },
   { value: '3h', label: 'Ahorradas al día' },
-  { value: '$180K', label: 'Revenue extra/mes' },
+  { value: '$180K MXN', label: 'Revenue extra/mes' },
   { value: '< 24h', label: 'Para implementar' },
 ];
 
