@@ -150,6 +150,9 @@ export default function HomePage() {
             Ver planes y precios
           </Link>
           <Link href="/marketing" className="border border-gray-700 hover:border-gray-500 text-white px-8 py-4 rounded-xl transition-colors text-lg">
+          <Link href="/chat" className="border border-gray-700 hover:border-gray-500 text-white px-8 py-4 rounded-xl transition-colors text-lg">
+  Habla con nuestro asesor
+</Link>
             Ver Marketing Engine
           </Link>
         </div>
