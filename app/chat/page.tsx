@@ -298,7 +298,7 @@ export default function ChatPage() {
             Enviar
           </button>
         </div>
-        <p className="text-xs text-gray-600 mt-2 text-center">Respuestas simuladas - Asistente Match Point AI v1.1</p>
+        <p className="text-xs text-gray-600 mt-2 text-center">Respuestas simuladas - Asistente Match Point AI v1.2 — Solo herramientas gratuitas</p>
       </div>
 
     </main>
