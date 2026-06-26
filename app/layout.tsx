@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Match Point AI — Gestion de Clubes de Padel",
-  description: "Plataforma de gestion para clubes de padel",
+  description: "Match Point AI — Automatiza reservas, socios y analytics para clubes de padel en Mexico",
 };
 
 export default function RootLayout({
