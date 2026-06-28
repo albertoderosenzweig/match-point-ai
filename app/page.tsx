@@ -147,14 +147,16 @@ export default function HomePage() {
         <p className="text-gray-400 text-lg mb-10">Sin contratos. Sin tarjeta de crédito. En línea en menos de 24 horas.</p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Link href="/pricing" className="bg-emerald-500 hover:bg-emerald-400 text-gray-950 font-bold px-8 py-4 rounded-xl transition-colors text-lg">
-            Ver planes y precios
-          </Link>
-          <Link href="/marketing" className="border border-gray-700 hover:border-gray-500 text-white px-8 py-4 rounded-xl transition-colors text-lg">
-          <Link href="/chat" className="border border-gray-700 hover:border-gray-500 text-white px-8 py-4 rounded-xl transition-colors text-lg">
-  Habla con nuestro asesor
+  Ver planes y precios
 </Link>
-            Ver Marketing Engine
-          </Link>
+<div className="flex flex-col sm:flex-row gap-4 justify-center">
+  <Link href="/chat" className="border border-gray-700 hover:border-gray-500 text-white px-8 py-4 rounded-xl transition-colors text-lg">
+    Habla con nuestro asesor
+  </Link>
+  <Link href="/marketing" className="border border-gray-700 hover:border-gray-500 text-white px-8 py-4 rounded-xl transition-colors text-lg">
+    Ver Marketing Engine
+  </Link>
+</div>
         </div>
       </section>
 
